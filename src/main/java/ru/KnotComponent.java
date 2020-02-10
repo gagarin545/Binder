@@ -18,8 +18,9 @@ public abstract class KnotComponent {
     public double getDistributed() {
         throw  new UnsupportedOperationException();
     }
-    public void setDistributed(Double distributed) { throw  new UnsupportedOperationException();    }
+    public void setDistributed(double distributed) { throw new UnsupportedOperationException();    }
+    public void setName(String name) { throw new UnsupportedOperationException();    }
 
-    public void print() { throw  new UnsupportedOperationException();
-}
+    public void difference() {   throw  new UnsupportedOperationException();     }
+    public void print() { throw  new UnsupportedOperationException();   }
 }

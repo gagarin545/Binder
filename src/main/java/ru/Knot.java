@@ -11,7 +11,7 @@ public class Knot extends KnotComponent {
     private String name;
     private ArrayList knots = new ArrayList();
 
-    public Knot(double consumed, String name) {
+    Knot(double consumed, String name) {
         this.consumed = consumed;
         this.name = name;
     }
@@ -24,26 +24,22 @@ public class Knot extends KnotComponent {
     public void setDistributed(double distributed) {        this.distributed = distributed;    }
     public String getName() {        return name;    }
     public void setName(String name) {        this.name = name;    }
-    public void print() {
-     //   System.out.println( getName() + "|" + getConsumed() + "|" + getDistributed());
-
-        double summa =  knots.stream().mapToDouble(x->  ((KnotComponent) x).getConsumed()).filter(x-> x > 0 ).reduce(Double::sum).getAsDouble();
+    public void difference() {
         double delta =  consumed - knots.stream().mapToDouble(x->  ((KnotComponent) x).getConsumed()).reduce(Double::sum).getAsDouble();
-
         knots.stream()
-                .mapToDouble(x-> ((KnotComponent) x).getConsumed())
-                .filter(x-> x > 0)
-                .map(x-> (x/summa) * delta)
-                ;
-        System.out.println("Родитель " + name + " имеет разницу " + delta +"|" + summa);
-
-        Iterator iterator = knots.iterator();
-        while(iterator.hasNext()) {
-            KnotComponent knot = (KnotComponent) iterator.next();
-            knot.setDistributed( 100.00);
-            System.out.println("Узел " + getName() + " распределенная нагрузка " + getConsumed() + "|" + getDistributed());
+                .filter(x-> ((KnotComponent) x).getConsumed() > 0)
+                .peek(x-> ((KnotComponent) x).setDistributed((((KnotComponent) x).getConsumed()/
+                        knots.stream().mapToDouble(a->  ((KnotComponent) a).getConsumed()).filter(a-> a > 0 ).reduce(Double::sum).getAsDouble())
+                        * delta))
+                .findAny();
+        System.out.println("Родитель " + name + " имеет разницу " + delta );
+    }
+    public void print() {
+        for (Object o : knots) {
+            KnotComponent knot = (KnotComponent) o;
+            knot.difference();
+            System.out.println("Узел " + getName() + " распределенная нагрузка " + getDistributed());
             knot.print();
         }
-      //  System.out.println("Родитель " + name + " имеет разницу " + (consumed - summa) );
     }
 }

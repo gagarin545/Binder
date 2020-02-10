@@ -5,7 +5,7 @@ public class KnotItem extends KnotComponent{
     private double distributed;
     private String name;
 
-    public KnotItem(double consumed,  String name) {
+    KnotItem(double consumed,  String name) {
         this.consumed = consumed;
         this.name = name;
     }
@@ -15,6 +15,7 @@ public class KnotItem extends KnotComponent{
     public void setDistributed(double distributed) {        this.distributed = distributed;    }
     public String getName() {        return name;    }
     public void setName(String name) {        this.name = name;    }
+    public void difference() {}
     public void print() {
         System.out.println("Узел " + getName() + " распределенная нагрузка " + getConsumed() + "|" + getDistributed());
     }
