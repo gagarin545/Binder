@@ -17,6 +17,6 @@ public class KnotItem extends KnotComponent{
     public void setName(String name) {        this.name = name;    }
     public void difference() {}
     public void print() {
-        System.out.println("Узел " + getName() + " распределенная нагрузка " + getConsumed() + "|" + getDistributed());
+        System.out.println("Узел " + getName() + " распределенная нагрузка " + getDistributed());
     }
 }

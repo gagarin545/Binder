@@ -10,6 +10,7 @@
 
     <properties>
         <junit.version>4.13-beta-2</junit.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>

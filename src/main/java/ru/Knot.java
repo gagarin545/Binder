@@ -35,8 +35,9 @@ public class Knot extends KnotComponent {
         System.out.println("Родитель " + name + " имеет разницу " + delta );
     }
     public void print() {
-        for (Object o : knots) {
-            KnotComponent knot = (KnotComponent) o;
+        Iterator iterator = knots.iterator();
+        while(iterator.hasNext()) {
+            KnotComponent knot = (KnotComponent) iterator.next();
             knot.difference();
             System.out.println("Узел " + getName() + " распределенная нагрузка " + getDistributed());
             knot.print();
