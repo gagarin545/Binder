@@ -2,8 +2,6 @@ package ru;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.OptionalDouble;
-import java.util.stream.Collectors;
 
 public class Knot extends KnotComponent {
     private double consumed;
@@ -31,7 +29,7 @@ public class Knot extends KnotComponent {
                 .peek(x-> ((KnotComponent) x).setDistributed((((KnotComponent) x).getConsumed()/
                         knots.stream().mapToDouble(a->  ((KnotComponent) a).getConsumed()).filter(a-> a > 0 ).reduce(Double::sum).getAsDouble())
                         * delta))
-                .findAny();
+                .forEach(x-> System.out.println(((KnotComponent) x).getDistributed()));
         System.out.println("Родитель " + name + " имеет разницу " + delta );
     }
     public void print() {
